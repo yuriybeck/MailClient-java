@@ -1,0 +1,4 @@
+mail.smtp.host=mail.beck-homes.com
+mail.smtp.from=java-mail@beck-homes.com
+mail.smtp.username=java-mail@beck-homes.com
+mail.smtp.password=srh_java_2023
