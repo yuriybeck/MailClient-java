@@ -7,6 +7,23 @@ import java.util.Properties;
 import java.util.Scanner;
 
 public class Main {
+
+    public boolean checkIfPropertyExists() {
+        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        System.out.println(rootPath.split("out")[0]);
+        String appConfigPath = rootPath.split("out")[0] + "mail.properties";
+
+        File file = new File(appConfigPath);
+        return file.exists();
+    }
+
+    public Properties requestProperties() {
+        return null;
+    }
+
+    public void writeProperties(Properties proeprties) {
+
+    }
     public Properties readProperties() throws FileNotFoundException, IOException {
         //TODO: make it generic
         Properties props = new Properties();
@@ -20,7 +37,17 @@ public class Main {
         return props;
     }
     public static void main(String[] args) throws Exception {
-        Properties props = new Main().readProperties();
+        Main main = new Main();
+
+        if (!main.checkIfPropertyExists()) {
+            System.out.println("WARN: properties not found.");
+            System.out.println("WARN: creating new properties.");
+            Properties properties = main.requestProperties();
+            main.writeProperties(properties);
+            return;
+        }
+
+        Properties props = main.readProperties();
 
         Scanner scanner = new Scanner(System.in);
 
