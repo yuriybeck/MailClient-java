@@ -8,10 +8,12 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static final String PROPERTY_NAME = "mail.properties";
+
     public boolean checkIfPropertyExists() {
         String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
         System.out.println(rootPath.split("out")[0]);
-        String appConfigPath = rootPath.split("out")[0] + "mail.properties";
+        String appConfigPath = rootPath.split("out")[0] + PROPERTY_NAME;
 
         File file = new File(appConfigPath);
         return file.exists();
@@ -42,15 +44,15 @@ public class Main {
         return props;
     }
 
-    public void writeProperties(Properties proeprties) {
-
+    public void writeProperties(Properties properties) throws Exception {
+        properties.store(new FileOutputStream(PROPERTY_NAME), null);
     }
     public Properties readProperties() throws FileNotFoundException, IOException {
         //TODO: make it generic
         Properties props = new Properties();
         String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
         System.out.println(rootPath.split("out")[0]);
-        String appConfigPath = rootPath.split("out")[0] + "mail.properties";
+        String appConfigPath = rootPath.split("out")[0] + PROPERTY_NAME;
         System.out.println(appConfigPath);
 
         props.load(new FileInputStream(appConfigPath));
@@ -88,16 +90,5 @@ public class Main {
         Session session = smtp.getInstance();
         Message msg = smtp.createMessage(session, mail);
         smtp.send(msg);
-
-        //java-mail@beck-homes.com
-        //axv8@50T4
-        //SMTP: mail.beck-homes.com
-        //SMTP-Port: 465
-
-
-
-
-
-
     }
 }
