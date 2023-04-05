@@ -1,3 +1,4 @@
 # Project exclude paths
 /out/
 mail.properties
+mail.properties_tmp
